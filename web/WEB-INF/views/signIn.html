@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <style>
+        .input {
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .button {
+            background: cornflowerblue;
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/auth/sign-in}" method="post" th:object="${SignInDto}">
+    <input class="input" type="email" name="email" placeholder="email" required>
+    <input class="input" type="password" name="password" placeholder="password" required>
+    <button class="button">Submit</button>
+</form>
+<div th:if="${message != null}">
+    <p th:text="${message}"></p>
+</div>
+</body>
+</html>

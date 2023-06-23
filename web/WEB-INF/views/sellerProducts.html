@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <style>
+    .input {
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+    .output{
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+    .button {
+      background: cornflowerblue;
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+<div th:if="${message!=null}">
+  <p th:text="${message}"></p>
+</div>
+<div>
+  <!--/*@thymesVar id="ProductCreateDto" type="uz.in.domain.dto.product.ProductCreateDto"*/-->
+  <form th:action="@{/seller/products}" method="post" th:object="${ProductCreateDto}">
+    <input class="input" type="text" name="category" placeholder="category" required list="categories">
+    <datalist id="categories">
+      <option>PHONE</option>
+      <option>TABLET</option>
+      <option>LAPTOP</option>
+      <option>MONITOR</option>
+      <option>TV</option>
+    </datalist>
+    <input class="input" type="text" name="name" placeholder="name" required>
+    <input class="input" type="text" name="maker" placeholder="maker" required>
+    <input class="input" type="number" name="price" placeholder="price" required>
+    <input class="input" type="text" name="description" placeholder="description" required>
+    <button class="button" type="submit">Submit</button>
+  </form>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-2">
+      <form action="/seller/products" method="post">
+        <table>
+          <thead>
+          <td class="output">Category</td>
+          <td class="output">Name</td>
+          <td class="output">Maker</td>
+          <td class="output">Price</td>
+          <td class="output">Description</td>
+          </thead>
+          <tbody th:each="product: ${products}">
+          <tr>
+            <td class="output" th:text="${product.getCategory()}"></td>
+            <td class="output" th:text="${product.getName()}"></td>
+            <td class="output" th:text="${product.getMaker()}"></td>
+            <td class="output" th:text="${product.getPrice()}"></td>
+            <td class="output" th:text="${product.getDescription()}"></td>
+            <td>
+              <a href="/edit/product"> <button class="button" name="editById" th:value="${product.getId()}" th:id="${product.getId()}" type="submit">Edit</button> </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

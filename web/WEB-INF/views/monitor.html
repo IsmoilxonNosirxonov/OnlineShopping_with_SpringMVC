@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monitor</title>
+  <style>
+    .input {
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+    .output{
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+    .button {
+      background: cornflowerblue;
+      width: 100px;
+      height: 30px;
+      font-size: 16px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-2">
+      <form action="/product/laptop" method="post">
+        <table>
+          <thead>
+          <td class="output">Category</td>
+          <td class="output">Name</td>
+          <td class="output">Maker</td>
+          <td class="output">Price</td>
+          <td class="output">Description</td>
+          </thead>
+          <tbody th:each="product: ${monitors}">
+          <tr>
+            <td class="output" th:text="${product.getCategory()}"></td>
+            <td class="output" th:text="${product.getName()}"></td>
+            <td class="output" th:text="${product.getMaker()}"></td>
+            <td class="output" th:text="${product.getPrice()}"></td>
+            <td class="output" th:text="${product.getDescription()}"></td>
+            <form action="/product/laptop" method="post">
+              <td>
+                <input class="input" type="number" min="0" name="amount" placeholder="amount" required>
+              </td>
+              <td>
+                <a href="/customer/products"><button name="productId" th:value="${product.getId()}" class="button" th:id="${product.getId()}">Buy</button></a>
+              </td>
+            </form>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

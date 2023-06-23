@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+    <style>
+        .input {
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        .button {
+            background: cornflowerblue;
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/edit/user}" method="post" th:object="${editUser}">
+    <input class="input" type="text" name="name" th:value="${editUser.getName()}" required>
+    <input class="input" type="email" name="email" th:value="${editUser.getEmail()}" required>
+    <input class="input" type="password" name="password" th:value="${editUser.getPassword()}" required>
+    <input class="input" type="number" min="0" name="balance" th:value="${editUser.getBalance()}" required>
+    <button class="button">Edit</button>
+</form>
+</body>
+</html>

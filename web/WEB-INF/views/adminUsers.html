@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        .output{
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        .button {
+            background: cornflowerblue;
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <form action="/admin/users" method="post">
+                <table>
+                    <thead>
+                    <td class="output">Name</td>
+                    <td class="output">Email</td>
+                    <td class="output">Password</td>
+                    <td class="output">Balance</td>
+                    <td class="output">Role</td>
+                    <td class="output">State</td>
+                    </thead>
+                    <tbody th:each="user: ${users}">
+                        <tr>
+                            <td class="output" th:text="${user.getName()}"></td>
+                            <td class="output" th:text="${user.getEmail()}"></td>
+                            <td class="output" th:text="${user.getPassword()}"></td>
+                            <td class="output" th:text="${user.getBalance()}"></td>
+                            <td class="output" th:text="${user.getRole()}"></td>
+                            <div th:if="${user.isAktive()}">
+                                <td class="output">Active</td>
+                                <td>
+                                    <form action="/admin/users" method="post">
+                                        <button name="block" th:value="${user.getId()}" class="button" th:id="${user.getId()}">Block</button>
+                                    </form>
+                                </td>
+                            </div>
+                            <div th:unless="${user.isAktive()}">
+                                <td class="output">Not Active</td>
+                                <td>
+                                    <form action="/admin/users" method="post">
+                                        <button name="unblock" th:value="${user.getId()}" class="button" th:id="${user.getId()}">Unblock</button>
+                                    </form>
+                                </td>
+                            </div>
+                            <td>
+                                <a href="/edit/user"> <button class="button" name="edit" th:value="${user.getId()}" th:id="${user.getId()}">Edit</button> </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

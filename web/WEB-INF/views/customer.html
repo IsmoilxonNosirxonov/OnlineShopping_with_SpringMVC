@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <style>
+        .output{
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        .button {
+            background: cornflowerblue;
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <a class="output">My balance:</a>
+        <a class="output" th:text="${balance}"></a>
+        <!--/*@thymesVar id="FillBalanceDto" type="uz.in.domain.dto.user.FillBalanceDto"*/-->
+        <form th:action="@{/customer/fill-balance}" method="post" th:object="${FillBalanceDto}">
+            <input class="input" type="number" min="0" name="amount" placeholder="amount" required>
+            <button class="button">Fill Balance</button>
+        </form>
+        <div class="col-md-8 offset-2">
+            <a href="/product/phone"> <button class="button">Phone</button> </a>
+            <a href="/product/tablet"> <button class="button">Tablet</button> </a>
+            <a href="/product/laptop"> <button class="button">Laptop</button> </a>
+            <a href="/product/monitor"> <button class="button">Monitor</button> </a>
+            <a href="/product/tv"> <button class="button">Tv</button> </a>
+            <div th:if="${message!=null}">
+                <p th:text="${message}"></p>
+            </div>
+            <div th:if="${!products.isEmpty()}">
+                <form action="/customer/products" method="get">
+                    <table>
+                        <thead>
+                        <td class="output">Category</td>
+                        <td class="output">Name</td>
+                        <td class="output">Maker</td>
+                        <td class="output">Price</td>
+                        <td class="output">Description</td>
+                        </thead>
+                        <tbody th:each="product: ${products}">
+                        <tr>
+                            <td class="output" th:text="${product.getCategory()}"></td>
+                            <td class="output" th:text="${product.getName()}"></td>
+                            <td class="output" th:text="${product.getMaker()}"></td>
+                            <td class="output" th:text="${product.getPrice()}"></td>
+                            <td class="output" th:text="${product.getDescription()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

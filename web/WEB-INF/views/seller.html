@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller</title>
+    <style>
+        .output{
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+        .button {
+            background: cornflowerblue;
+            width: 100px;
+            height: 30px;
+            font-size: 16px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <a class="output">My balance:</a>
+        <a class="output" th:text="${balance}"></a>
+        <!--/*@thymesVar id="FillBalanceDto" type="uz.in.domain.dto.user.FillBalanceDto"*/-->
+        <form th:action="@{/seller/fill-balance}" method="post" th:object="${FillBalanceDto}">
+            <input class="input" type="number" min="0" name="amount" placeholder="amount" required>
+            <button class="button">Fill Balance</button>
+        </form>
+        <div class="col-md-8 offset-2">
+            <a href="/seller/products"> <button class="button">Products</button> </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
